@@ -1,6 +1,7 @@
 require 'eyes_selenium'
 
-eyes = Applitools::Selenium::Eyes.new
+runner = Applitools::ClassicRunner.new
+eyes = Applitools::Selenium::Eyes.new(runner: runner)
 web_driver = Selenium::WebDriver.for :chrome
 Applitools::EyesLogger.log_handler = Logger.new(STDOUT).tap do |l|
   l.level = Logger::ERROR
@@ -33,15 +34,15 @@ begin
 
   # Check the app page
   eyes.check('App Page', Applitools::Selenium::Target.window.fully)
-  result = eyes.close(false)
-  puts result
+  eyes.close(false)
 rescue => e
   puts e.message
+  eyes.abort
 ensure
   # Close the browser
   driver.quit
-  # If the test was aborted before eyes.Close was called, ends the test as aborted.
-  eyes.abort_if_not_closed
+  # Get and print all test results
+  puts runner.get_all_test_results
 end
 
 
