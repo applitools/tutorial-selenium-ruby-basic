@@ -30,13 +30,12 @@ begin
 
   # Check the app page
   eyes.check_window('App window')
-  eyes.close_async
-rescue => e
-  puts e.message
-  eyes.abort_if_not_closed
+  eyes.close
 ensure
   # Close the browser
   driver.quit
+  #  If the test was aborted before eyes.close / eyes.close_async was called, ends the test as aborted.
+  eyes.abort_if_not_closed
   # Get and print all test results
   puts runner.get_all_test_results
 end
