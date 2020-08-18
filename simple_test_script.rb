@@ -23,20 +23,19 @@ begin
   # but then change the above URL to https://demo.applitools.com/index_v2.html (for the 2nd run)
 
   # check the login page
-  eyes.check_window('Login window')
+  eyes.check(name: 'Login window', target: Applitools::Selenium::Target.window.fully)
 
   # Click the 'Log In' button
   driver.find_element(:id, 'log-in').click
 
   # Check the app page
-  eyes.check_window('App window')
-  eyes.close_async
-rescue => e
-  puts e.message
-  eyes.abort_if_not_closed
+  eyes.check(name: 'App window', target: Applitools::Selenium::Target.window.fully)
+  eyes.close
 ensure
   # Close the browser
   driver.quit
+  #  If the test was aborted before eyes.close / eyes.close_async was called, ends the test as aborted.
+  eyes.abort_if_not_closed
   # Get and print all test results
   puts runner.get_all_test_results
 end
