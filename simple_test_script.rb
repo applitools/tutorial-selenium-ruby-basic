@@ -1,8 +1,11 @@
 require 'eyes_selenium'
 
+options = Selenium::WebDriver::Chrome::Options.new
+options.add_argument('--headless') if ENV['CI'] == 'true'
+
 runner = Applitools::ClassicRunner.new
 eyes = Applitools::Selenium::Eyes.new(runner: runner)
-web_driver = Selenium::WebDriver.for :chrome
+web_driver = Selenium::WebDriver.for :chrome, options: options
 
 eyes.batch = Applitools::BatchInfo.new("Demo Batch")
 
