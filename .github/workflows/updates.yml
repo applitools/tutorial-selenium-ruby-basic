@@ -18,6 +18,12 @@ jobs:
         with:
           ruby-version: 2.6
 
+      - name: Get lastest eyes_selenium verison
+        run: VERSION=$(gem search -e eyes_selenium | grep eyes_selenium | grep -E -o "\d+.\d+.\d+")
+
+      - name: Update gemfile and install dependencies
+        run: bundle remove eyes_selenium && bundle add eyes_selenium -v $VERSION
+
       - name: Install dependencies
         run: bundle install
 
@@ -25,3 +31,8 @@ jobs:
         run: bundle exec ruby simple_test_script.rb
         env:
           APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+
+      - uses: mikeal/publish-to-github-action@master
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            BRANCH_NAME: 'master'
