@@ -18,11 +18,8 @@ jobs:
         with:
           ruby-version: 2.6
 
-      - name: Get lastest eyes_selenium verison
-        run: VERSION=$(gem search -e eyes_selenium | grep eyes_selenium | grep -E -o "\d+.\d+.\d+")
-
       - name: Update gemfile and install dependencies
-        run: bundle remove eyes_selenium && bundle add eyes_selenium -v $VERSION
+        run: chmod +x ./updateGemfile.sh && ./updateGemfile.sh
 
       - name: Install dependencies
         run: bundle install
