@@ -64,7 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  eyes_selenium
+  eyes_selenium (= 3.18.0)
 
 BUNDLED WITH
    2.1.4
