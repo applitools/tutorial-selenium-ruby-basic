@@ -21,9 +21,6 @@ jobs:
       - name: Update gemfile and install dependencies
         run: chmod +x ./updateGemfile.sh && ./updateGemfile.sh
 
-      - name: Install dependencies
-        run: bundle install
-
       - name: Run test
         run: bundle exec ruby simple_test_script.rb
         env:
