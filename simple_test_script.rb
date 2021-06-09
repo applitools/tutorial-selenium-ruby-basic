@@ -7,11 +7,11 @@ runner = Applitools::ClassicRunner.new
 eyes = Applitools::Selenium::Eyes.new(runner: runner)
 web_driver = Selenium::WebDriver.for :chrome, options: options
 
-eyes.batch = Applitools::BatchInfo.new("Demo Batch - Classic - Ruby")
+eyes.batch = Applitools::BatchInfo.new("Demo Batch - Selenium Ruby - Classic")
 
 eyes.configure do |conf|
-  conf.app_name = 'Demo App - Classic - Selenium Ruby'
-  conf.test_name = 'Smoke Test - Classic - Selenium Ruby'
+  conf.app_name = 'Demo App - Selenium Ruby - Classic'
+  conf.test_name = 'Smoke Test - Selenium Ruby - Classic'
   conf.viewport_size = Applitools::RectangleSize.new(800, 600)
 end
 
