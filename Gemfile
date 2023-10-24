@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
 
-gem "eyes_selenium", "= 3.18.3"
+gem 'eyes_selenium', '~> 5.0'
